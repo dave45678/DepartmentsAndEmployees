@@ -12,26 +12,23 @@
 <div class="container">
     <div class="space"></div>
     <div class="p-2">
-        <h2 class="text-light text-center">Instructors</h2>
+        <h2 class="text-light text-center">Employees</h2>
     </div>
 
     <div class="row mt-3">
-        <!--<div class="col-sm-12 col-md-4 ml-4 card" th:each="oneMeme : ${instructors}">-->
         <div class="col-sm-12 col-md-4 ml-4 card"
-             th:each="oneInstructor : ${instructors}">
+             th:each="oneEmployee : ${employees}">
             <!--class="col-4 card"-->
             <img width="200px" class="card-img-top"
-                 th:src="(${oneInstructor.pictureUrl}!=null)?${oneInstructor.pictureUrl}:'/img/placeholder.png'"/>
+                 th:src="(${oneEmployee.pictureUrl}!=null)?${oneEmployee.pictureUrl}:'/img/placeholder.png'"/>
 
             <div class="card-body">
-                <h5 class="card-title" th:text="${oneInstructor.name}"></h5>
+                <h5 class="card-title" th:text="${oneEmployee.name}"></h5>
                 <h6 class="card-subtitle mb-2 text-muted"
-                    th:text="${oneInstructor.courseId}"></h6>
-                    <!--th:text="${oneInstructor.model}"></h6>-->
+                    th:text="${oneEmployee.departmentId}"></h6>
                 <div>
-                    <!--<span class="card-text" th:text="${oneInstructor.year}"></span>-->
-                    <span class="card-text" th:text="${oneInstructor.employeeId}"></span>
-                    <span><a th:href="@{/detail/{id}(id=${oneInstructor.id})}">View More</a></span>
+                    <span class="card-text" th:text="${oneEmployee.name}"></span>
+                    <span><a th:href="@{/detail/{id}(id=${oneEmployee.id})}">View More</a></span>
                 </div>
                 <br/>
             </div>
@@ -43,7 +40,7 @@
         <h2 class="text-light text-center">Departments</h2>
     </div>
     <div class="row mt-3">
-        <div class="col-sm-6 col-md-2 ml-3" th:each="oneDep : ${categories}">
+        <div class="col-sm-6 col-md-2 ml-3" th:each="oneDep : ${departments}">
             <a href="/" th:text="${oneDep.department}"
                class="btn btn-secondary"></a>
         </div>

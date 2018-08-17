@@ -11,15 +11,15 @@
         <div class="col-6">
             <div class="card">
                 <!--<div class="card-header" th:text="${instructor.manufacturer}"></div>-->
-                <div class="card-header" th:text="${instructor.name}"></div>
+                <div class="card-header" th:text="${employee.name}"></div>
                 <!--<img th:src="${instructor.pictureUrl}" width="100%"/>-->
-                <img th:src="${instructor.pictureUrl}" width="100%"/>
+                <img th:src="${employee.pictureUrl}" width="100%"/>
                 <div class="card-body">
-                    <h5 class="card-title" th:text="${instructor.employeeId}"></h5>
-                    <p class="card-text" th:text="${instructor.courseId}"></p>
+                    <h5 class="card-title" th:text="${employee.employeeId}"></h5>
+                    <p class="card-text" th:text="${employee.courseId}"></p>
 
-                    <a class="btn btn-info btn-sm" th:href="@{/update/{id}(id=${instructor.id})}">Update</a>
-                    <a class="btn btn-danger btn-sm" th:href="@{/delete/{id}(id=${instructor.id})}">Delete</a>
+                    <a class="btn btn-info btn-sm" th:href="@{/update/{id}(id=${employee.id})}">Update</a>
+                    <a class="btn btn-danger btn-sm" th:href="@{/delete/{id}(id=${employee.id})}">Delete</a>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
     </div>
 </div>
 
-<!--<footer th:replace="base :: footer"></footer>-->
+<footer th:replace="base :: footer"></footer>
 <div th:replace="base :: scripts"></div>
 </body>
 </html>

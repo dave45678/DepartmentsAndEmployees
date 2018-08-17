@@ -2,10 +2,10 @@ package com.example.challenge6;
 
 import com.cloudinary.utils.ObjectUtils;
 import com.example.challenge6.config.CloudinaryConfig;
-import com.example.challenge6.model.Instructor;
+import com.example.challenge6.model.Employee;
 import com.example.challenge6.model.Department;
-import com.example.challenge6.repository.InstructorRepository;
 import com.example.challenge6.repository.DepartmentRepository;
+import com.example.challenge6.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +20,7 @@ import java.util.Map;
 public class HomeController {
 
     @Autowired
-    InstructorRepository instructorRepository;
+    EmployeeRepository employeeRepository;
 
     @Autowired
     DepartmentRepository departmentRepository;
@@ -29,67 +29,65 @@ public class HomeController {
     CloudinaryConfig cloudc;
 
     @RequestMapping("/")
-    public String listActors(Model model) {
-        model.addAttribute("instructors", instructorRepository.findAll());
-        model.addAttribute("categories", departmentRepository.findAll());
+    public String listEmployees(Model model) {
+        model.addAttribute("employees", employeeRepository.findAll());
         return "list";
     }
 
-    @GetMapping("/add")
-    public String newMeme(Model model) {
-        model.addAttribute("instructor", new Instructor());
-        model.addAttribute("categories", departmentRepository.findAll());
-        return "form";
+    @GetMapping("/addempl")
+    public String newEmployee(Model model) {
+        model.addAttribute("employee", new Employee());
+        model.addAttribute("departments", departmentRepository.findAll());
+        return "emplform";
     }
 
-    @GetMapping("/addCat")
-    public String newType(Model model){
-        model.addAttribute("type", new Department());
-        return "category";
+    @GetMapping("/adddept")
+    public String newDepartment(Model model){
+        model.addAttribute("department", new Department());
+        return "deptform";
     }
 
-    @PostMapping("/add")
-    public String processMeme(@Valid @ModelAttribute("instructor") Instructor meme,
+    @PostMapping("/adddept")
+    public String processCategory(@Valid @ModelAttribute("department") Department department){
+        departmentRepository.save(department);
+        return "redirect:/";
+    }
+    @PostMapping("/addempl")
+    public String processEmployee(@Valid @ModelAttribute("employee") Employee employee,
                               @RequestParam("file") MultipartFile file) {
 
         if (file.isEmpty()) {
             System.out.println("File is empty...");
-            return "redirect:/add";
+            return "redirect:/addempl";
         }
         try {
             Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
-            meme.setPictureUrl(uploadResult.get("url").toString());
+            employee.setPictureUrl(uploadResult.get("url").toString());
 
-            instructorRepository.save(meme);
+            employeeRepository.save(employee);
         } catch (IOException e) {
             e.printStackTrace();
-            return "redirect:/add";
+            return "redirect:/addempl";
         }
-        return "redirect:/";
-    }
-
-    @PostMapping("/addCat")
-    public String processCategory(@Valid @ModelAttribute("type") Department department){
-        departmentRepository.save(department);
         return "redirect:/";
     }
 
 
     @RequestMapping("/detail/{id}")
     public String showMeme(@PathVariable("id") long id, Model model) {
-        model.addAttribute("instructor", instructorRepository.findById(id).get());
+        model.addAttribute("employee", employeeRepository.findById(id).get());
         return "show";
     }
 
     @RequestMapping("/update/{id}")
     public String updateMeme(@PathVariable("id") long id, Model model) {
-        model.addAttribute("instructor", instructorRepository.findById(id));
-        return "form";
+        model.addAttribute("employee", employeeRepository.findById(id));
+        return "emplform";
     }
 
     @RequestMapping("/delete/{id}")
     public String deleteMeme(@PathVariable("id") long id) {
-        instructorRepository.deleteById(id);
+        employeeRepository.deleteById(id);
         return "redirect:/";
     }
 

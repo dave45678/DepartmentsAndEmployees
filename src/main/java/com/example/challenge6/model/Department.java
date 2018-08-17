@@ -9,21 +9,12 @@ public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
-//    private String categorie;
     private String department;
 
-    @OneToMany(mappedBy = "department",
+    @OneToMany(mappedBy = "id",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
-    public Set<Instructor> instructor;
-
-//    @OneToMany(mappedBy = "type",
-//            cascade = CascadeType.ALL,
-//            fetch = FetchType.EAGER)
-//    public Set<Instructor> instructors;
-
-
+    public Set<Employee> employees;
 
     public long getId() {
         return id;
@@ -41,27 +32,11 @@ public class Department {
         this.department = department;
     }
 
-    //    public String getCategories() {
-//        return categorie;
-//    }
-//
-//    public void setCategories(String categories) {
-//        this.categorie = categories;
-//    }
-//
-//    public String getCategorie() {
-//        return categorie;
-//    }
-//
-//    public void setCategorie(String categorie) {
-//        this.categorie = categorie;
-//    }
-
-    public Set<Instructor> getInstructor() {
-        return instructor;
+    public Set<Employee> getEmployees() {
+        return employees;
     }
 
-    public void setInstructor(Set<Instructor> instructor) {
-        this.instructor = instructor;
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
     }
 }

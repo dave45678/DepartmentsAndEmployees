@@ -13,9 +13,9 @@
             <div class="col-2">&nbsp;</div>
             <div class="col-8">
                 <br/><br/>
-                <h3 class="text-center">Add an Instructor</h3><br/>
+                <h3 class="text-center">Add an Employee</h3><br/>
 
-                <form method="POST" action="/add" th:object="${instructor}" enctype="multipart/form-data">
+                <form method="POST" action="/addempl" th:object="${employee}" enctype="multipart/form-data">
 
                     <div class="form-group">
                         <input type="hidden" th:field="*{id}"
@@ -30,26 +30,19 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="courseIdInput">Course ID</label>
-                        <input type="text" th:field="*{courseId}"
-                               class="form-control" id="courseIdInput"
-                               placeholder="Enter course ID" />
+                        <label for="departmentIdInput">Department ID</label>
+                        <input type="text" th:field="*{id}"
+                               class="form-control" id="departmentIdInput"
+                               placeholder="Enter department ID" />
                     </div>
 
                     <div class="form-group">
                         <label for="employeeIdInput">Employee ID</label>
-                        <input type="text" th:field="*{employeeId}"
+                        <input type="text" th:field="*{id}"
                                class="form-control" id="employeeIdInput"
                                placeholder="Enter employee ID" />
                     </div>
 
-                    <div class="form-group">
-                        <label for="departmentInput">Department</label>
-                        <select class="form-control" id="departmentInput" th:field="*{department}">
-                            <option th:each="aCategory : ${categories}" th:value="${aCategory.id}"
-                                    th:text="${aCategory.department}"></option>
-                        </select>
-                    </div>
 
                     <div class="form-group">
                         <label for="fileInput">Image</label>
